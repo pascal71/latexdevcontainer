@@ -59,13 +59,14 @@ RUN apt-get update -y && \
     cpanm -n -q YAML::Tiny && \
     cpanm -n -q File::HomeDir && \
     cpanm -n -q Unicode::GCString && \
-    apt-get remove -y cpanminus make gcc libc6-dev && \
+    apt-get remove -y cpanminus gcc libc6-dev && \
     apt-get clean autoclean && \
     apt-get autoremove -y && \
     pip3 install Pygments && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
 RUN tlmgr install latexindent latexmk && \
     texhash && \
+    apt install make xz-utils rsync && \
     rm /usr/local/texlive/${TEXLIVE_VERSION}/texmf-var/web2c/*.log && \
     rm /usr/local/texlive/${TEXLIVE_VERSION}/tlpkg/texlive.tlpdb.main.*
 #COPY --from=chktex /tmp/chktex /usr/local/bin/chktex
